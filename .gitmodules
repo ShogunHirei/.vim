@@ -1,0 +1,9 @@
+[submodule "Plugins/nerdcommenter"]
+	path = Plugins/nerdcommenter
+	url = git@github.com:scroolose/nerdcommenter.git
+[submodule "Plugins/nerdtree"]
+	path = Plugins/nerdtree
+	url = git@github.com:scroolose/nerdcommenter.git
+[submodule "Plugins/ultisnips"]
+	path = Plugins/ultisnips
+	url = git@github.com:sirver/ultisnips.git
