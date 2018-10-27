@@ -1,2 +1,3 @@
 *.swp
-/Plugins/fromthehell/
+/Plugins/fromthehell
+*.netrwhist

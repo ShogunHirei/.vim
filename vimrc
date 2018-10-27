@@ -27,11 +27,11 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'SirVer/ultisnips'
 
 " Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 
 "Testing the YouCompleteMe plugin, for C Programming Languages families syntax
 "support, first a commit for sake of safeness :)
-
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 
 
 call plug#end()
