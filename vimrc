@@ -31,8 +31,9 @@ Plug 'honza/vim-snippets'
 
 "Testing the YouCompleteMe plugin, for C Programming Languages families syntax
 "support, first a commit for sake of safeness :)
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 
+"Plugin for parentesis and quotes completion
+Plug 'vim-scripts/delimitMate.vim'
 
 call plug#end()
 
@@ -58,10 +59,10 @@ set autoindent
 " -> RELOAD VIMRC 
 " Source the .vimrc or _vimrc file, depending on system
 if &term == "win32" || "pcterm" || has("gui_win32")
-	map ,v :e $HOME/_vimrc<CR>
+	noremap ,v :e $HOME/_vimrc<CR>
 	nmap <F12> :<C-u>source /home/shogunhirei/_vimrc <BAR> echo "Vimrc recarregado!"<CR>
 else
-	map ,v :e $HOME/.vimrc<CR>
+	noremap ,v :e $HOME/.vimrc<CR>
 	nmap <F12> :<C-u>source /home/shogunhirei/.vimrc <BAR> echo "Vimrc recarregado!"<CR>
 endif  
 " -> END: RELOAD VIMRC
@@ -72,16 +73,25 @@ endif
 "#################################################
 "
 " -> GUIAS 
-map <F4> :tabnext<cr>
-map <F3> :tabprevious<cr>
+noremap çl :tabnext<cr>
+noremap çh :tabprevious<cr>
+noremap tb :tabnew 
+inoremap <F5> <esc>0i
+inoremap <F6> <esc>$i<right> 
+inoremap <C-e> <esc>zzi
+noremap ś :%s/
+inoremap ´d <esc>dbi
 
 " ->END: GUIAS
 
 " -> LEADER 
 let mapleader = " "
 let g:mapleader = " "
-map <leader>w :w<cr>
-map <leader>qq :q!<cr>
+noremap <leader>w :w<cr>
+noremap <leader>qq :q!<cr>
+noremap <leader>wq :wq<cr>
+noremap <leader><leader>n /
+
 
 " -> END: LEADER 
 
@@ -91,7 +101,7 @@ map <leader>qq :q!<cr>
 "-> NerdTree Configurations""""""""""""""""""""""
 let NERDTreeShowHidden=1
 let NERDTreeMapActivateNode='<right>'
-map <F2> :NERDTreeToggle<cr>
+noremap <F2> :NERDTreeToggle<cr>
 
 
 "-> END NerdTree configurations""""""""""""""""""
@@ -106,15 +116,22 @@ map <F2> :NERDTreeToggle<cr>
 "
 " -> UtilSnips
 " If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 
 
 
 " -> END: UtilSnips
 
+" -> YouCompleteMe 
 
+ "let g:ycm_server_python_interpreter = '/usr/bin/python'
+
+
+" -> END: YouCompleteMe
 
 
 
