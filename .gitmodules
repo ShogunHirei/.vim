@@ -7,3 +7,6 @@
 [submodule "Plugins/ultisnips"]
 	path = Plugins/ultisnips
 	url = git@github.com:sirver/ultisnips.git
+[submodule "Plugins/vim-snippets"]
+	path = Plugins/vim-snippets
+	url = git@github.com:honza/vim-snippets

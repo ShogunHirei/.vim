@@ -1,0 +1,59 @@
+snippet inc "Include basic C headers" 
+#include <stdio.h>
+#include <stdlib.h>
+
+
+endsnippet 
+
+snippet main "Declaration of main with args"
+int main(int argc, char** argv)
+{
+    $1 
+}
+endsnippet 
+
+snippet com "Insert comment on codel"
+/*
+	@`echo $USER`
+	${1:comment}
+	`!v strftime("%c")`
+*/
+endsnippet 
+
+snippet ret "For return Finalization" b
+return(EXIT_SUCCESS);
+endsnippet
+
+snippet prin "Completion for Printf commands" b!
+printf("${1:Texto 1}",${2:Vars});
+endsnippet
+
+snippet sca "Completion for Scanf commands" b!
+scanf("%${1:flag}",&${2:vars});
+endsnippet 
+
+snippet str	 "Inserir header de string" b!
+#include <string.h>
+endsnippet
+
+
+snippet if "Inserir if e else"
+if(${1:"Condition"})
+{
+	${2:"Process"}
+}
+endsnippet
+
+
+snippet els "Inserir else"
+else
+{
+	${1:"Process"}
+}
+endsnippet
+
+snippet todo "Inser todo about what's is missing" b
+	//TODO: ${1:Description}
+	//@`echo $USER` `strftime(now)`
+	//`!v strftime("%c")`
+endsnippet
