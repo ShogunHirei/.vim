@@ -1,0 +1,100 @@
+snippet inic "Cabeçalho Inicial para a formatação do Texto" b!
+
+%Classe do documento: Outras opções scrartcl
+\documentclass{article}
+
+%Relacionado à entrada de dados
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+%Relacionado à utilização do idioma e regras gramaticais
+\usepackage[brazilian]{babel}
+\usepackage{hyphenat}
+\usepackage{indentfirst}
+
+%Formatação de caracteres especiais
+\usepackage{textgreek}
+
+%Formatação de Margens (O que lembro da ABNT por enquanto)
+\usepackage[left=3cm, right=2cm, top=2cm, bottom=3cm]{geometry}
+
+%Utilização de imagens no texto
+\usepackage{subfigure}
+\usepackage{graphicx}
+\graphicspath{{./}} %Inserir caminhos da pasta com as imagens 
+
+\title{${1:Título do Trabalho}}
+\author{${2:Autor do Trabalho}} 
+
+\begin{document}
+
+	${0:Conteúdo}
+
+
+\end{document}
+
+endsnippet
+
+snippet item "Inserir item em algum lugar - TEX"
+
+\item{
+	${1:description}
+}
+
+endsnippet
+
+snippet beg "Begin Latex Enviroment"
+\begin{${1:enviroment}}
+	${2:Content}
+\end{$1}
+endsnippet
+
+snippet tit "Texto Itálico" i
+\textit{${1:Content}}
+endsnippet
+
+snippet tbf "Texto Negrito" 
+\textbf{${1:Content}}
+endsnippet
+
+snippet sec "Criar seção" b!
+\section{${1:Section Content}}
+endsnippet
+
+
+snippet ssec "Criar subseção" b!
+\subsection{${1:Subsection Content}}
+endsnippet
+
+snippet sssec "Criar subsubseção" b!
+\subsubsection{${1:Subsubsection Content}}
+endsnippet
+
+snippet par "Paragraph"
+
+\paragraph{${1:Description}} ${2:Content}
+endsnippet
+
+snippet figure "Insert Figure"
+	
+\begin{figure}
+    \caption{${3:Legenda da Figura}}
+    \includegraphics[width=\textwidth]{${1:Figura}}
+    \label{${2:Referencia da Figura}}
+\end{figure}
+
+endsnippet
+
+snippet ref "Adicionar referência"
+\ref{${1:fig:1}}
+endsnippet
+
+snippet $dq  "Aspas 'duplas'" A
+\`\`${1:content}''
+endsnippet
+
+snippet $$ "Inserir algum caractere especial" Ai
+$\\${1:content}$
+endsnippet
+
+
