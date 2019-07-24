@@ -1,5 +1,4 @@
 snippet inic "Cabeçalho Inicial para a formatação do Texto" b!
-
 %Classe do documento: Outras opções scrartcl
 \documentclass{article}
 
@@ -23,13 +22,23 @@ snippet inic "Cabeçalho Inicial para a formatação do Texto" b!
 \usepackage{graphicx}
 \graphicspath{{./}} %Inserir caminhos da pasta com as imagens 
 
+% Para elaboração de referências no corpo do texto
+\usepackage{csquotes}
+\usepackage[style=${3:abnt-numeric}]{biblatex}
+\addbibresource{${4:Arquivo de Referências}} 
+
 \title{${1:Título do Trabalho}}
 \author{${2:Autor do Trabalho}} 
 
 \begin{document}
+\maketitle
 
 	${0:Conteúdo}
 
+
+
+% Referências do Trabalho 
+\printbibliography
 
 \end{document}
 
@@ -47,6 +56,16 @@ snippet beg "Begin Latex Enviroment"
 \begin{${1:enviroment}}
 	${2:Content}
 \end{$1}
+endsnippet
+
+snippet list "Iniciar Lista de Itens" b!
+\begin{enumerate}${1:[estilo]}
+
+	\item{${2:Content}
+	}
+
+\end{enumerate}
+
 endsnippet
 
 snippet tit "Texto Itálico" i
@@ -79,17 +98,17 @@ snippet figure "Insert Figure"
 	
 \begin{figure}
     \caption{${3:Legenda da Figura}}
-    \includegraphics[width=\textwidth]{${1:Figura}}
+    \includegraphics[width=\textwidth]{${1:Figura}}%
     \label{${2:Referencia da Figura}}
 \end{figure}
 
 endsnippet
 
-snippet ref "Adicionar referência"
-\ref{${1:fig:1}}
+snippet ~ref "Adicionar referência" Ai
+~\ref{${1:fig:1}}
 endsnippet
 
-snippet $dq  "Aspas 'duplas'" A
+snippet $dq  "Aspas 'duplas'" Ai
 \`\`${1:content}''
 endsnippet
 
@@ -97,4 +116,30 @@ snippet $$ "Inserir algum caractere especial" Ai
 $\\${1:content}$
 endsnippet
 
+#####################################################
+# Para facilitar escrita de fórmulas no texto 
+#####################################################
+
+snippet gp "Greater Parenthesis" iw
+\left${2:(} ${1:content} \right${3:)}
+endsnippet
+
+snippet pd "Derivada Parcial"
+	\frac{\partial ${1:f(x)}}{\partial ${2:x}}
+endsnippet
+
+snippet dx "De-hon (?) de x" wi
+\partial ${1:Variável}
+endsnippet
+
+####################################################
+# Para acelerar escrita de citações no texto 
+#####################################################
+snippet cit "Definição de Citação" i
+\autocite{${1:citation}}
+endsnippet
+
+snippet acit "Citando Author" i
+\citeauthor*{${1:Key}}
+endsnippet
 

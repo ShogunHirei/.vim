@@ -16,7 +16,7 @@ call plug#begin('/home/lucashqr/.vim/Plugins')
 " Local de Listagem dos Plugins
 "
 "Color theme
-Plug 'whatyouhide/vim-gotham'
+Plug 'mhartington/oceanic-next'
 
 "Nerd tree
 Plug 'scrooloose/nerdtree'
@@ -24,11 +24,11 @@ Plug 'scrooloose/nerdtree'
 "Nerd Commenter
 Plug 'scrooloose/nerdcommenter'
 
-"UtilSnips, plugin para inserir compleições de código baseadas em um arquivos
+"UltiSnips, plugin para inserir compleições de código baseadas em um arquivos
 Plug 'SirVer/ultisnips'
 
 " Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
+"Plug 'honza/vim-snippets'
 
 "Using VimTex for writing text
 Plug 'lervag/vimtex'
@@ -67,11 +67,14 @@ Plug 'davidhalter/jedi-vim'
 " Supertab for Python files compoletion tests
 Plug 'ervandew/supertab'
 
+" CtrlP, Fuzzy File finder, encontrar arquivos em diretórios 
+Plug 'kien/ctrlp.vim'
 
 call plug#end()
 
 ""Colocando esquema de cores
-colorscheme gotham
+"colorscheme gotham
+colorscheme OceanicNext
 "colorscheme iceberg
 "colorscheme spacegray
 set number
@@ -82,10 +85,9 @@ set shiftwidth=4
 set expandtab
 set smartindent
 set autoindent
-set colorcolumn=100
+set colorcolumn=30,50,80,100
 set hlsearch
 set showmatch
-" Para ter o Alt funcionando
 filetype plugin indent on 
 syntax on
 
@@ -119,7 +121,9 @@ noremap <localleader>k :tabnext<cr>
 noremap <localleader>j :tabprevious<cr>
 noremap <localleader>q :tabclose<cr>
 noremap <localleader>b :tabnew 
-inoremap <C-e> <esc>zzi
+" Fechar todos os buffers exceto o ativo
+noremap <localleader>X :%bd|e#
+inoremap <silent> <C-e> <C-\><C-O>zt<C-O>7<C-Y>
 " Para poder recuperar texto apagado acidentalmente  em Insert Mode
 inoremap <silent> <C-W> <C-\><C-O>db
 inoremap <silent> <C-U> <C-\><C-O>d0
@@ -163,8 +167,14 @@ nnoremap <localleader>O O<esc>
 " Se o a numeração de erros do ALE ficar pesada lembrar de 
 " desativar a numeração para tentar ajudar.
 map <F5> <C-\>:set number!<CR> 
+nnoremap <localleader>T :ALEFix trim_whitespace <CR>
+nnoremap <localleader>Y :ALEFix remove_trailing_lines <CR>
 
+" Para navegar entre os buffers mais facilmente
 
+nnoremap <leader>BB :bN <CR>
+nnoremap <leader>bb :bn <CR>
+nnoremap <leader>bx :bdelete <CR>
 " -> END: LEADER 
 
 """CONFIGURAÇÃO DOS PLUGINS
@@ -251,6 +261,7 @@ if !exists('g:ycm_semantic_triggers')
 endif
 
 let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
+let g:vimtex_fold_enabled = 1
 
 " ############################################# -> VIM-ALE  ###########################
 " Plugin for asynchronous linting (hope that is fast)
@@ -275,12 +286,14 @@ let g:ale_echo_cursor = 0
 
 " ################################################ -> LIGTHLINE ##################################
 "  Configuration for Gotham Theme
-let g:lightline = { 'colorscheme': 'gotham' }
+"let g:lightline = { 'colorscheme': 'gotham' }
+let g:lightline = { 'colorscheme': 'oceanicnext' }
 
 " Air line configuration for buffer show
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#formatter = 'default'
+let g:airline_theme = 'oceanicnext'
 
 
 " ############################################# -> VIM-TMUX-NAVIGATOR ###########################
@@ -302,9 +315,4 @@ let g:jedi#popup_select_first = 1
 " Remove the tab completion mode, consider using Supertab
 let g:jedi#completions_command = "<C-Space>"
 
-
-" ############################################# -> VIM-WORKMAN  ########################### 
-
-map <leader><leader>kb :Workman<cr>
-map <leader><leader>kb :Workman!<cr>
 
