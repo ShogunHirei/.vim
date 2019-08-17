@@ -1,4 +1,4 @@
-"#Creating File of configurations for Vim, following random internet tutorial 
+"Creating File of configurations for Vim, following random internet tutorial 
 "
 if empty(glob('/home/lucashqr/.vim/autoload/plug.vim'))
   silent !curl -fLo /home/lucashqr/.vim/autoload/plug.vim --create-dirs
@@ -121,8 +121,6 @@ noremap <localleader>k :tabnext<cr>
 noremap <localleader>j :tabprevious<cr>
 noremap <localleader>q :tabclose<cr>
 noremap <localleader>b :tabnew 
-" Fechar todos os buffers exceto o ativo
-noremap <localleader>X :%bd|e#
 inoremap <silent> <C-e> <C-\><C-O>zt<C-O>7<C-Y>
 " Para poder recuperar texto apagado acidentalmente  em Insert Mode
 inoremap <silent> <C-W> <C-\><C-O>db
