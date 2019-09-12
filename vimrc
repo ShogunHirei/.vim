@@ -1,7 +1,7 @@
 "Creating File of configurations for Vim, following random internet tutorial 
 "
-if empty(glob('/home/lucashqr/.vim/autoload/plug.vim'))
-  silent !curl -fLo /home/lucashqr/.vim/autoload/plug.vim --create-dirs
+if empty(glob('$HOME/.vim/autoload/plug.vim'))
+  silent !curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
@@ -10,7 +10,7 @@ filetype off
 
 "Especificando o diretorio aonde deverão ser instalados os plugins do Vim
 
-call plug#begin('/home/lucashqr/.vim/Plugins')
+call plug#begin('$HOME/.vim/Plugins')
 
 
 " Local de Listagem dos Plugins
@@ -102,10 +102,10 @@ syntax on
 " Source the .vimrc or _vimrc file, depending on system
 if &term == "win32" || "pcterm" || has("gui_win32")
 	noremap ,v :e $HOME/_vimrc<CR>
-	nmap <F12> :<C-u>source /home/lucashqr/_vimrc <BAR> echo "Vimrc recarregado!"<CR>
+	nmap <F12> :<C-u>source $HOME/_vimrc <BAR> echo "Vimrc recarregado!"<CR>
 else
 	noremap ,v :e $HOME/.vimrc<CR>
-	nmap <F12> :<C-u>source /home/lucashqr/.vimrc <BAR> echo "Vimrc recarregado!"<CR>
+	nmap <F12> :<C-u>source $HOME/.vimrc <BAR> echo "Vimrc recarregado!"<CR>
 endif  
 " -> END: RELOAD VIMRC
 
@@ -218,7 +218,7 @@ let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 "############################################# ---> YOUCOMPLETEME ################################
 
 let g:ycm_use_clangd = "Always"
-let g:ycm_clangd_binary_path = "/home/lucashqr/Configuration Files/YCM Installation/llvm_root"
+let g:ycm_clangd_binary_path = "$HOME/Configuration Files/YCM Installation/llvm_root"
 let g:ycm_server_python_interpreter = ''
 
 " Video do Youtube TLDR
