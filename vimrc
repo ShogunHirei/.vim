@@ -110,7 +110,7 @@ endif
 " -> END: RELOAD VIMRC
 
 " Abrir o .vimrc para edição
-map <F9> :vsplit ~/.vimrc <CR> 
+map <F9> :vsplit +113 ~/.vimrc <CR> 
 "
 "
 " EDIÇÃO, VISUALIZAÇÃO, GERENCIAMENTO, etc... 
@@ -190,7 +190,7 @@ noremap <F2> :NERDTreeToggle<cr>
 " descrição do projeto no Github
 
 " Comentar linhas acima
-map <leader>co O<esc><Leader>cA
+map <leader>co O<esc><leader>cA
 
 
 "################ ############## -###############-> ULTISNIPS ############### ###############  

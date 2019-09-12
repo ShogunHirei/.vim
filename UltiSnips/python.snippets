@@ -1,19 +1,58 @@
-snippet pp "Print Function"
-print($1)
+snippet pf "Print Function" Ab
+print(f"${1:Text} {${2:Object}}")
 endsnippet
 
-snippet for "Generic For function"
-for ${1:Counter} in ${2:Iter}:
+snippet pp "Print Object" Ab
+print(${1:object})
+endsnippet
+
+snippet for "Generic For function" Ab
+for ${1:Text} in ${2:Iter}:
 	${3:execution}
+endsnippet
+
+snippet docs "Docstring Snippet" A
+"""
+File: `!p snip.rv=snip.fn`
+Author: ShogunHirei
+Description: ${1}
+"""
+
 
 endsnippet
 
-snippet numpy "Import Numpy"
+snippet np "NUmpy import" A
+numpy as np
+endsnippet 
+
+snippet md "Modred import" A
+modred as md
+endsnippet 
+
+snippet imp "Import Generalization" A
+import $0
+endsnippet
+
+snippet plt "Matplotlib PYplot import" A
+pyplot as plt 
+endsnippet
+
+snippet redimp "Imports Used during Keras ANN-Keras" A
 import numpy as np
+import modred as md
+from keras.layers import ${1:Dense}
+$2${2/(from)/(?0: keras.callbacks import:)/}${3:Tensorboard, EarlyStopping"}
 endsnippet
 
-snippet math "Import math"
-import math
-endsnippet
+snippet ddef "Function with DocString Associated" A
 
+def ${1:func_name}(${2:arg}):
+	"""
+		File: `!p snip.rv=snip.fn`
+		Function Name: $1
+		Summary: ${3:Extract Data}
+		Description: ${4: Function Description}
+	"""
+	$0
+endsnippet
 
