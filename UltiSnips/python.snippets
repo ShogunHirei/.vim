@@ -21,8 +21,12 @@ Description: ${1}
 
 endsnippet
 
-snippet np "NUmpy import" A
-numpy as np
+snippet "(\w+).par" "Parenthesis (postfix)" r
+(`!p snip.rv = match.group(1)`$1)$0
+endsnippet
+
+snippet "(\w+) np" "NUmpy import" rA
+`!p snip.rv = 'import numpy as np' if match.group(1)=='import' else ''`
 endsnippet 
 
 snippet md "Modred import" A
@@ -39,9 +43,11 @@ endsnippet
 
 snippet redimp "Imports Used during Keras ANN-Keras" A
 import numpy as np
-import modred as md
-from keras.layers import ${1:Dense}
-$2${2/(from)/(?0: keras.callbacks import:)/}${3:Tensorboard, EarlyStopping"}
+from keras.models import ${1:Sequential}
+from keras.layers import ${2:Dense}
+$3${3/(from)/(?0: keras.callbacks import:)/}${4:TensorBoard, EarlyStopping}
+from sklearn.model_selection import train_test_split
+$3${3/(from)/(?0: sklearn.preprocessing import:)/}${5:MinMaxScaler}
 endsnippet
 
 snippet ddef "Function with DocString Associated" A
