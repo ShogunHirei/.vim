@@ -6,10 +6,10 @@ snippet pp "Print Object" Ab
 print(${1:object})
 endsnippet
 
-snippet for "Generic For function" Ab
-for ${1:Text} in ${2:Iter}:
-	${3:execution}
-endsnippet
+#snippet for "Generic For function" Ab
+#for ${1:Text} in ${2:Iter}:
+#${3:execution}
+#endsnippet
 
 snippet docs "Docstring Snippet" A
 """
@@ -25,17 +25,13 @@ snippet "(\w+).par" "Parenthesis (postfix)" r
 (`!p snip.rv = match.group(1)`$1)$0
 endsnippet
 
-snippet "(\w+) np" "NUmpy import" rA
-`!p snip.rv = 'import numpy as np' if match.group(1)=='import' else ''`
-endsnippet 
+#snippet "(\w+) np" "NUmpy import" rA
+#`!p snip.rv = 'import numpy as np' if match.group(1)=='import' else match.group(1)`
+#endsnippet 
 
 snippet md "Modred import" A
 modred as md
 endsnippet 
-
-snippet imp "Import Generalization" A
-import $0
-endsnippet
 
 snippet plt "Matplotlib PYplot import" A
 pyplot as plt 

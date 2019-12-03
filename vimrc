@@ -1,7 +1,7 @@
 "Creating File of configurations for Vim, following random internet tutorial 
 "
 if empty(glob('$HOME/.vim/autoload/plug.vim'))
-  silent !curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs
+  silent !curl -fLo $HOME/.vim/autoload/plug.vim --create-dirsDone!
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
@@ -33,8 +33,8 @@ Plug 'SirVer/ultisnips'
 "Using VimTex for writing text
 Plug 'lervag/vimtex'
 
-"Using the LightLine (I believe that's for highliting of the under bar
-Plug 'itchyny/lightline.vim'
+""Using the LightLine (I believe that's for highliting of the under bar
+"Plug 'itchyny/lightline.vim'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -70,6 +70,9 @@ Plug 'ervandew/supertab'
 " CtrlP, Fuzzy File finder, encontrar arquivos em diretórios 
 Plug 'kien/ctrlp.vim'
 
+" VimSpell para correção ortográfica
+"Plug 'vim-scripts/vimspell'
+
 call plug#end()
 
 ""Colocando esquema de cores
@@ -78,7 +81,7 @@ colorscheme OceanicNext
 "colorscheme iceberg
 "colorscheme spacegray
 set number
-"filetype indent on
+filetype indent on
 set nowrap
 set tabstop=4
 set shiftwidth=4
@@ -87,7 +90,10 @@ set smartindent
 set autoindent
 set colorcolumn=30,50,80,100
 set hlsearch
+set scrolloff=9999
 set showmatch
+set spell spelllang=pt
+set sps=10 
 filetype plugin indent on 
 syntax on
 
@@ -192,28 +198,47 @@ noremap <F2> :NERDTreeToggle<cr>
 " Comentar linhas acima
 map <leader>co O<esc><leader>cA
 
+" ############################################# -> VIMSPELL  ###########################
+" 
+"au! BufNewFile,BufRead * let b:spell_language="brasileiro"
+
+map <F7> :SpellCheck<CR>
+map <F8> :SpellProposeAlternatives<CR>
+map <F3> :set spell spelllang=pt <CR>
+map <F4> :SpellSetLanguage american <CR>
+let spell_auto_type="tex,doc,mail"
+let spell_language_list="brasileiro,american"
+
+" Função para não ativar o corretor ortográfico
+" em arquivos que não sejam de texto
+let b:fn_exten=expand('%:e')
+if b:fn_exten == 'tex'
+    set spelllang=pt
+else
+    set nospell
+endif
+
 
 "################ ############## -###############-> ULTISNIPS ############### ###############  
 
 " If you want :UltiSnipsEdit to split your window.
 " Função encontrada em fórum para mudar a selação de snippets para Enter
-let g:UltiSnipsExpandTrigger = "<nop>"
 let g:ulti_expand_or_jump_res = 0
-function! ExpandSnippetOrCarriageReturn()
-    let snippet = UltiSnips#ExpandSnippetOrJump()
-    if g:ulti_expand_or_jump_res > 0
-        return snippet
-    else
-        return "\<CR>"
-    endif
+function! <SID>ExpandSnippetOrReturn()
+  let snippet = UltiSnips#ExpandSnippetOrJump()
+  if g:ulti_expand_or_jump_res > 0
+    return snippet
+  else
+    return "\<CR>"
+  endif
 endfunction
-inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
+imap <expr> <CR> pumvisible() ? "<C-R>=<SID>ExpandSnippetOrReturn()<CR>" : "<Plug>delimitMateCR"
 
+let g:UltiSnipsExpandTrigger = "<NUL>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsJumpForwardTrigger="ª"
 let g:UltiSnipsJumpBackwardTrigger="º"
-let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
-
+let g:UltiSnipsSnippetDirectories = ['$HOME/.vim/UltiSnips', 'UltiSnips']
 
 "############################################# ---> YOUCOMPLETEME ################################
 
@@ -263,11 +288,17 @@ let g:vimtex_fold_enabled = 1
 
 " ############################################# -> VIM-ALE  ###########################
 " Plugin for asynchronous linting (hope that is fast)
-let g:ale_linters = {'python' : [ 'pylint', 'flake8']}
-let g:ale_fixers = {'python' : ['autopep8', 'yapf']}
+" Janela lateral
+let g:ale_set_loclist = 1
+let g:ale_list_vertical = 1
+let g:ale_keep_list_window_open = 1
+
+let g:ale_linters = {'python' : ['flake8']}
+let g:ale_fixers = {'python' : [ 'pylint', 'autopep8', 'yapf']}
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_close_preview_on_insert = 1 
 let g:ale_cursor_detail = 0
+let g:ale_echo_delay=300
 
 " For ALE linting process
 let g:airline#extensions#ale#enabled = 1
@@ -278,14 +309,23 @@ nmap \r :ALEPrevious<CR>
 nmap <C-q> :ALEToggle<CR>
 nmap <C-d> <Plug>(ale_detail)
 
-let g:ale_list_window_size = 5
+let g:ale_list_window_size = 3
+let g:ale_sign_column_always = 1
+let g:ale_echo_cursor = 1
 
-let g:ale_echo_cursor = 0
+" Formatting echos msg
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+
+
+
 
 " ################################################ -> LIGTHLINE ##################################
 "  Configuration for Gotham Theme
 "let g:lightline = { 'colorscheme': 'gotham' }
-let g:lightline = { 'colorscheme': 'oceanicnext' }
+"let g:lightline = { 'colorscheme': 'oceanicnext' }
 
 " Air line configuration for buffer show
 let g:airline#extensions#tabline#enabled = 1
@@ -312,5 +352,3 @@ let g:jedi#popup_on_dot = 0
 " Remove the tab completion mode, consider using Supertab
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#show_call_signatures = "0"
-
-
