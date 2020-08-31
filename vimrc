@@ -15,8 +15,6 @@ call plug#begin('$HOME/.vim/Plugins')
 
 " Local de Listagem dos Plugins
 "
-"Color theme
-Plug 'mhartington/oceanic-next'
 
 "Nerd tree
 Plug 'scrooloose/nerdtree'
@@ -33,18 +31,16 @@ Plug 'SirVer/ultisnips'
 "Using VimTex for writing text
 Plug 'lervag/vimtex'
 
-""Using the LightLine (I believe that's for highliting of the under bar
-"Plug 'itchyny/lightline.vim'
-
+" Vim airline and themes
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 "Testing the YouCompleteMe plugin, for C Programming Languages families syntax
 "support, first a commit for sake of safeness :)
-Plug 'valloric/youcompleteme'
+"Plug 'valloric/youcompleteme'
 
-"Plugin for parentesis and quotes completion
-Plug 'vim-scripts/delimitMate.vim'
+""Plugin for parentesis and quotes completion
+"Plug 'vim-scripts/delimitMate.vim'
 
 "Plugin for navigation in panes, windows and splits in tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -55,11 +51,11 @@ Plug 'konfekt/fastfold'
 "Testando ferramentas para manipulação de múltiplas janelas
 "Plug 'cesheridan/tabwins'
 
-" Plugin for syntax checking, Asynchronous Light Engine
-Plug 'w0rp/ale'
+"" Plugin for syntax checking, Asynchronous Light Engine
+"Plug 'w0rp/ale'
 
-" Plugin for multiple cursors selection
-Plug 'terryma/vim-multiple-cursors'
+"" Plugin for multiple cursors selection
+"Plug 'terryma/vim-multiple-cursors'
 
 " Plugin for autocompletion of Python builtins 
 Plug 'davidhalter/jedi-vim'
@@ -67,19 +63,49 @@ Plug 'davidhalter/jedi-vim'
 " Supertab for Python files compoletion tests
 Plug 'ervandew/supertab'
 
-" CtrlP, Fuzzy File finder, encontrar arquivos em diretórios 
-Plug 'kien/ctrlp.vim'
+"" CtrlP, Fuzzy File finder, encontrar arquivos em diretórios 
+"Plug 'kien/ctrlp.vim'
 
-" VimSpell para correção ortográfica
-"Plug 'vim-scripts/vimspell'
+" Tagbar - Destaque de definições
+Plug 'majutsushi/tagbar'
+
+"" Vim-grammarous
+"Plug 'rhysd/vim-grammarous'
+
+"" Vim-proc asynchronous plugin for Grammarous
+"Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+
+"" Tpope asynchronous program compiler
+"Plug 'tpope/vim-dispatch'
+
+
+" Mark the commented plugins for removal
+
+" #### Plugins in avaliation
+
+" Surround delimitmate substitute
+Plug 'tpope/vim-surround'
+
+" Substitute of YCM
+Plug 'ajh17/VimCompletesMe'
+
+" Tpope's Vim fugitive was installed in the directory
+
+" Nord Pallete Color Scheme
+Plug 'arcticicestudio/nord-vim'
+Plug 'mhartington/oceanic-next'
+Plug 'gkeep/iceberg-dark'
+Plug 'edkolev/tmuxline.vim'
 
 call plug#end()
 
 ""Colocando esquema de cores
 "colorscheme gotham
 colorscheme OceanicNext
+"colorscheme nord
 "colorscheme iceberg
 "colorscheme spacegray
+set encoding=utf-8
 set number
 filetype indent on
 set nowrap
@@ -89,14 +115,25 @@ set expandtab
 set smartindent
 set autoindent
 set colorcolumn=30,50,80,100
+set scrolloff=7
 set hlsearch
-set scrolloff=9999
 set showmatch
-set spell spelllang=pt
+"set spell spelllang=pt
 set sps=10 
 filetype plugin indent on 
 syntax on
+highlight SpellBad ctermfg=DarkRed ctermbg=None
 
+" Typewriter mode
+function! Typewriter()
+    nnoremap j jzt
+    nnoremap k kzt
+    " Latex: Salvar e compilar
+    nnoremap <localleader>v :w<CR>:VimtexCompile<CR>:VimtexView <CR> 
+endfunction
+
+nnoremap <F4> :call Typewriter()<CR>
+call Typewriter()
 
 
 " MAPEAMENTO DE TECLAS
@@ -116,7 +153,7 @@ endif
 " -> END: RELOAD VIMRC
 
 " Abrir o .vimrc para edição
-map <F9> :vsplit +113 ~/.vimrc <CR> 
+map <F9> :vsplit +113 $HOME/.vimrc <CR> 
 "
 "
 " EDIÇÃO, VISUALIZAÇÃO, GERENCIAMENTO, etc... 
@@ -127,6 +164,8 @@ noremap <localleader>k :tabnext<cr>
 noremap <localleader>j :tabprevious<cr>
 noremap <localleader>q :tabclose<cr>
 noremap <localleader>b :tabnew 
+noremap <localleader>h zt
+noremap <localleader>l zb
 inoremap <silent> <C-e> <C-\><C-O>zt<C-O>7<C-Y>
 " Para poder recuperar texto apagado acidentalmente  em Insert Mode
 inoremap <silent> <C-W> <C-\><C-O>db
@@ -145,8 +184,9 @@ nnoremap <silent> <backspace> :nohlsearch<Bar>:echo<CR>
 " ->END: GUIAS
 
 " -> LEADER 
-let mapleader = " "
-let g:mapleader = " "
+let mapleader = "\ "
+let g:mapleader = "\ "
+let maplocalleader = "\\"
 
 noremap <leader>w :w<cr>
 noremap <leader>q :q<cr>
@@ -167,12 +207,15 @@ nnoremap <localleader>_ :vertical resize -15<cr>
 nnoremap <localleader>o o<esc>
 nnoremap <localleader>O O<esc>
 
+" Desabilitando função Ex do vim pela tecla Q
+nnoremap Q <nop>
+
 
 " Se o a numeração de erros do ALE ficar pesada lembrar de 
 " desativar a numeração para tentar ajudar.
-map <F5> <C-\>:set number!<CR> 
-nnoremap <localleader>T :ALEFix trim_whitespace <CR>
-nnoremap <localleader>Y :ALEFix remove_trailing_lines <CR>
+"map <F5> <C-\>:set number!<CR> 
+"nnoremap <localleader>T :ALEFix trim_whitespace <CR>
+"nnoremap <localleader>Y :ALEFix remove_trailing_lines <CR>
 
 " Para navegar entre os buffers mais facilmente
 
@@ -200,17 +243,10 @@ map <leader>co O<esc><leader>cA
 
 " ############################################# -> VIMSPELL  ###########################
 " 
-"au! BufNewFile,BufRead * let b:spell_language="brasileiro"
-
-map <F7> :SpellCheck<CR>
-map <F8> :SpellProposeAlternatives<CR>
-map <F3> :set spell spelllang=pt <CR>
-map <F4> :SpellSetLanguage american <CR>
-let spell_auto_type="tex,doc,mail"
-let spell_language_list="brasileiro,american"
 
 " Função para não ativar o corretor ortográfico
 " em arquivos que não sejam de texto
+
 let b:fn_exten=expand('%:e')
 if b:fn_exten == 'tex'
     set spelllang=pt
@@ -218,21 +254,41 @@ else
     set nospell
 endif
 
+" Definição do verificador ortográfico
+function! Toogle_spell()
+    if &spelllang == 'pt'
+        set spell spelllang=en
+        echom "Changed Spell Language to English!"
+    else
+        set spell spelllang=pt
+        echom "Idioma alterado para Português!"
+    endif
+endfunction
+
+nnoremap <F8> :call Toogle_spell()<CR>
+
+" Vim-Grammarous
+" Enable use of vim-spelllang
+let g:grammarous#use_vim_spelllang=1
+let g:grammarous#show_first_error = 1
+nnoremap <localleader>G <Plug>(grammarous-open-info-window)
+vnoremap <C-g> :GrammarousCheck <CR> 
+
 
 "################ ############## -###############-> ULTISNIPS ############### ###############  
 
 " If you want :UltiSnipsEdit to split your window.
 " Função encontrada em fórum para mudar a selação de snippets para Enter
-let g:ulti_expand_or_jump_res = 0
-function! <SID>ExpandSnippetOrReturn()
-  let snippet = UltiSnips#ExpandSnippetOrJump()
-  if g:ulti_expand_or_jump_res > 0
-    return snippet
-  else
-    return "\<CR>"
-  endif
-endfunction
-imap <expr> <CR> pumvisible() ? "<C-R>=<SID>ExpandSnippetOrReturn()<CR>" : "<Plug>delimitMateCR"
+"let g:ulti_expand_or_jump_res = 0
+"function! <SID>ExpandSnippetOrReturn()
+  "let snippet = UltiSnips#ExpandSnippetOrJump()
+  "if g:ulti_expand_or_jump_res > 0
+    "return snippet
+  "else
+    "return "\<CR>"
+  "endif
+"endfunction
+"imap <expr> <CR> pumvisible() ? "<C-R>=<SID>ExpandSnippetOrReturn()<CR>" : "<Plug>delimitMateCR"
 
 let g:UltiSnipsExpandTrigger = "<NUL>"
 let g:UltiSnipsEditSplit="vertical"
@@ -242,25 +298,25 @@ let g:UltiSnipsSnippetDirectories = ['$HOME/.vim/UltiSnips', 'UltiSnips']
 
 "############################################# ---> YOUCOMPLETEME ################################
 
-let g:ycm_use_clangd = "Always"
-let g:ycm_clangd_binary_path = "$HOME/Configuration Files/YCM Installation/llvm_root"
-let g:ycm_server_python_interpreter = ''
+"let g:ycm_use_clangd = "Always"
+"let g:ycm_clangd_binary_path = "$HOME/Configuration Files/YCM Installation/llvm_root"
+"let g:ycm_server_python_interpreter = ''
 
-" Video do Youtube TLDR
+"" Video do Youtube TLDR
 
-let g:ycm_python_binary_path = 'python3'
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_min_num_of_chars_for_completion = 1
+"let g:ycm_python_binary_path = 'python3'
+"let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_min_num_of_chars_for_completion = 1
 
-" Trying to use a gobal configuration file to python coding -> Valloric's User's Guide
-let g:ycm_python_interpreter_path = ''
-let g:ycm_python_sys_path = ["/usr/local/lib/python3.6/dist-packages/tensorflow"]
-let g:ycm_extra_conf_vim_data = [
-  \  'g:ycm_python_interpreter_path',
-  \  'g:ycm_python_sys_path'
-  \]
-let g:ycm_global_ycm_extra_conf = '~/Configuration Files/YCM/Python/global_extra_conf.py'
-"let g:ycm_server_python_interpreter = '/usr/bin/python3.6'
+"" Trying to use a gobal configuration file to python coding -> Valloric's User's Guide
+"let g:ycm_python_interpreter_path = ''
+"let g:ycm_python_sys_path = ["/usr/local/lib/python3.6/dist-packages/tensorflow"]
+"let g:ycm_extra_conf_vim_data = [
+  "\  'g:ycm_python_interpreter_path',
+  "\  'g:ycm_python_sys_path'
+  "\]
+"let g:ycm_global_ycm_extra_conf = '~/Configuration Files/YCM/Python/global_extra_conf.py'
+""let g:ycm_server_python_interpreter = '/usr/bin/python3.6'
 
 
 " ############################################# --> VIMTEX #######################################
@@ -268,7 +324,12 @@ let g:ycm_global_ycm_extra_conf = '~/Configuration Files/YCM/Python/global_extra
 "
 let g:vimtex_view_method = 'zathura'
 let g:latex_view_general_viewer = 'zathura'
-let g:tex_flavor = 'xelatex'
+let g:tex_flavor = 'latexrun'
+"let g:vimtex_compiler_latexmk = {'build_dir': './output'}
+let g:vimtex_compiler_method = 'latexrun'
+let g:vimtex_compiler_latexrun = {'build_dir': './output/'}
+let g:vimtex_complete_bib = {'simple': 1}
+
 
 " Para mudar o compilador para XeTex
 function! SetXeTex()
@@ -278,49 +339,77 @@ endfunction
 
 map <localleader>lx :<C-U>call SetXeTex()<CR>
 
+
 " Habilitar autocompletar com o YCM
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
 endif
 
 let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
+" Folding methods in vimtex
 let g:vimtex_fold_enabled = 1
+" To fold only subsections
+let g:vimtex_fold_types = {'sections':{'parse_levels':0, 'sections': ['subsection', 'subsubsections']} }
+set fillchars=fold:\ 
 
-" ############################################# -> VIM-ALE  ###########################
-" Plugin for asynchronous linting (hope that is fast)
-" Janela lateral
-let g:ale_set_loclist = 1
-let g:ale_list_vertical = 1
-let g:ale_keep_list_window_open = 1
+"let g:vimtex_quickfix_enabled = 0
+let g:vimtex_quickfix_mode=0
+"let g:vimtex_fold_manual = 1 
+"
+"Table of Contents customization
+augroup vimtex_customization
+  autocmd!
+  autocmd FileType tex call CreateTocs()
+augroup END
 
-let g:ale_linters = {'python' : ['flake8']}
-let g:ale_fixers = {'python' : [ 'pylint', 'autopep8', 'yapf']}
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_close_preview_on_insert = 1 
-let g:ale_cursor_detail = 0
-let g:ale_echo_delay=300
+function! CreateTocs()
+  let g:custom_toc1 = vimtex#toc#new({
+      \ 'layers' : ['label', 'todo'],
+      \ 'todo_sorted' : 0,
+      \ 'show_help' : 0,
+      \ 'show_numbers' : 0,
+      \ 'mode' : 4,
+      \})
+  nnoremap <silent> \ly :call g:custom_toc1.open()<cr>
 
-" For ALE linting process
-let g:airline#extensions#ale#enabled = 1
+  let g:custom_toc2 = vimtex#toc#new({
+      \ 'layers' : ['include'],
+      \ 'show_help' : 0,
+      \})
+  nnoremap <silent> \lY :call g:custom_toc2.open()<cr>
+endfunction
 
-" Mappings for quickfix operations
-nmap \e :ALENext<CR>
-nmap \r :ALEPrevious<CR>
-nmap <C-q> :ALEToggle<CR>
-nmap <C-d> <Plug>(ale_detail)
+"" ############################################# -> VIM-ALE  ###########################
+"" Plugin for asynchronous linting (hope that is fast)
+"" Janela lateral
+"let g:ale_set_loclist = 1
+"let g:ale_list_vertical = 1
+"let g:ale_keep_list_window_open = 1
 
-let g:ale_list_window_size = 3
-let g:ale_sign_column_always = 1
-let g:ale_echo_cursor = 1
+"let g:ale_linters = {'python' : ['flake8']}
+"let g:ale_fixers = {'python' : [ 'pylint', 'autopep8', 'yapf']}
+"let g:ale_lint_on_text_changed = 'never'
+"let g:ale_close_preview_on_insert = 1 
+"let g:ale_cursor_detail = 0
+"let g:ale_echo_delay=300
 
-" Formatting echos msg
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+"" For ALE linting process
+"let g:airline#extensions#ale#enabled = 1
 
+"" Mappings for quickfix operations
+"nmap \e :ALENext<CR>
+"nmap \r :ALEPrevious<CR>
+"nmap <C-q> :ALEToggle<CR>
+"nmap <C-d> <Plug>(ale_detail)
 
+"let g:ale_list_window_size = 3
+"let g:ale_sign_column_always = 1
+"let g:ale_echo_cursor = 1
 
-
+"" Formatting echos msg
+"let g:ale_echo_msg_error_str = 'E'
+"let g:ale_echo_msg_warning_str = 'W'
+"let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 " ################################################ -> LIGTHLINE ##################################
 "  Configuration for Gotham Theme
@@ -331,7 +420,11 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#formatter = 'default'
-let g:airline_theme = 'oceanicnext'
+let g:airline_theme = 'deus'
+let g:airline#extensions#tmuxline#enabled = 0
+
+" TmuxLine
+let g:tmuxline_theme = 'zenburn'
 
 
 " ############################################# -> VIM-TMUX-NAVIGATOR ###########################
@@ -352,3 +445,13 @@ let g:jedi#popup_on_dot = 0
 " Remove the tab completion mode, consider using Supertab
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#show_call_signatures = "0"
+
+
+" ############################################# -> TAGBAR   ##########################
+nnoremap <F6> :TagbarToggle <CR><C-W>w
+
+
+" ############################################# -> FUGITIVE-VIM   ##########################
+
+" Git help functions, password cache
+

@@ -44,11 +44,9 @@ snippet inic "Cabeçalho Inicial para a formatação do Texto" b!
 
 endsnippet
 
-snippet item "Inserir item em algum lugar - TEX"
+snippet it "Inserir item em algum lugar - TEX"
 
-\item{
-	${1:description}
-}
+\item{ ${1:description}}
 
 endsnippet
 
@@ -61,8 +59,7 @@ endsnippet
 snippet list "Iniciar Lista de Itens" b!
 \begin{enumerate}${1:[estilo]}
 
-	\item{${2:Content}
-	}
+	\item{${2:Content}}
 
 \end{enumerate}
 
@@ -70,6 +67,10 @@ endsnippet
 
 snippet tit "Texto Itálico" i
 \textit{${1:Content}}
+endsnippet
+
+snippet tsc "Texto Negrito" 
+\textsc{${1:Content}}
 endsnippet
 
 snippet tbf "Texto Negrito" 
@@ -96,16 +97,36 @@ endsnippet
 
 snippet figure "Insert Figure"
 	
-\begin{figure}
-    \caption{${3:Legenda da Figura}}
+\begin{figure}%
     \includegraphics[width=\textwidth]{${1:Figura}}%
-    \label{${2:Referencia da Figura}}
+    \caption{${3:Legenda da Figura}}%
+    \label{${2:Referencia da Figura}}%
 \end{figure}
 
 endsnippet
 
+snippet subfigure "Insert Sub-figure"
+	
+\begin{figure}[${11:h}]
+    %\centering
+    \begin{subfigure}{${5:Figure1_column_size}}
+        \includegraphics[${7:subfigure_size}]{${1:figure1_path}}%
+        \caption{${3:Figure1_caption}}%
+        \label{${9:subfigure_label}}
+    \end{subfigure}%
+    \hspace{10mm} % LEMBRE-SE DE CONFIGURAR AQUI!
+    \begin{subfigure}{${6:Figure2_column_size}}
+        \includegraphics[${8:subfigure_size}]{${2:figure2_path}}%
+        \caption{${4:Figure2_caption}}%
+        \label{${10:subfigure_label}}
+    \end{subfigure}
+    \caption{${10:FIGURE CAPTION}}
+\end{figure}
+endsnippet
+
+
 snippet ~ref "Adicionar referência" Ai
-~\ref{${1:fig:1}}
+${2:Figure}~\ref{${1:fig:1}}
 endsnippet
 
 snippet $dq  "Aspas 'duplas'" Ai
@@ -136,10 +157,22 @@ endsnippet
 # Para acelerar escrita de citações no texto 
 #####################################################
 snippet cit "Definição de Citação" i
-\autocite{${1:citation}}
+\cite{${1:citation}}
 endsnippet
 
-snippet acit "Citando Author" i
-\citeauthor*{${1:Key}}
+snippet ait "Citando Author" i
+\citet{${1:Key}}
 endsnippet
+
+snippet pcit "Citando Author" i
+\citep{${1:Key}}
+endsnippet
+
+
+snippet todo "Criando TODO: para listagem por vimtex-toc" i
+% TODO: $0
+endsnippet
+
+
+
 

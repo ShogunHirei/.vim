@@ -29,13 +29,13 @@ endsnippet
 #`!p snip.rv = 'import numpy as np' if match.group(1)=='import' else match.group(1)`
 #endsnippet 
 
-snippet md "Modred import" A
-modred as md
-endsnippet 
+#snippet md "Modred import" A
+#modred as md
+#endsnippet 
 
-snippet plt "Matplotlib PYplot import" A
-pyplot as plt 
-endsnippet
+#snippet plt "Matplotlib PYplot import" A
+#pyplot as plt 
+#endsnippet
 
 snippet redimp "Imports Used during Keras ANN-Keras" A
 import numpy as np
@@ -47,7 +47,6 @@ $3${3/(from)/(?0: sklearn.preprocessing import:)/}${5:MinMaxScaler}
 endsnippet
 
 snippet ddef "Function with DocString Associated" A
-
 def ${1:func_name}(${2:arg}):
 	"""
 		File: `!p snip.rv=snip.fn`
@@ -58,3 +57,31 @@ def ${1:func_name}(${2:arg}):
 	$0
 endsnippet
 
+snippet cclas "Class definition with docstring" A
+class ${1:ClassName}:
+	"""
+	Class: $1
+	${2:Class Docstring}
+
+	"""
+
+	def __init__(self, ${3:*args}):
+		self.$3 = $3
+		${4:args}
+
+	
+	def ${5:classMethod}(self, ${6:args}):
+		"""
+		Class: $1
+		Method: $5
+		Summary: ${7: Short Description}
+		Description: ${8: Long Description }
+
+		"""
+endsnippet
+
+
+# Multiline triple strings
+snippet 3t' "" A
+''' ${1}'''
+endsnippet

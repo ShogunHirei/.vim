@@ -37,3 +37,9 @@ function readme()
     watch --no-title -x bash -c "get_readme $1"
 }
 
+
+# Connection to tensorboard port 
+alias tb2_clus='ssh -Y -f lshogun@146.164.45.180 -p  20022 -N -L '
+
+#To pass arguments to gnuplot, MUST HAVE gnuConf
+function plot(){ gnuplot -p -e "filename='$1'"  gnuConf;}; 
