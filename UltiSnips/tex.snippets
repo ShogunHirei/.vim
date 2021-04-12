@@ -97,8 +97,9 @@ endsnippet
 
 snippet figure "Insert Figure"
 	
-\begin{figure}%
-    \includegraphics[width=\textwidth]{${1:Figura}}%
+\begin{figure}[${5:h}]%
+	\centering
+    \includegraphics[${4:scale=0.5}]{${1:Figura}}%
     \caption{${3:Legenda da Figura}}%
     \label{${2:Referencia da Figura}}%
 \end{figure}
@@ -125,8 +126,20 @@ snippet subfigure "Insert Sub-figure"
 endsnippet
 
 
-snippet ~ref "Adicionar referência" Ai
-${2:Figure}~\ref{${1:fig:1}}
+snippet ~eref "Adicionar equação" i
+Equação~\ref{${1:fig:1}}
+endsnippet
+
+snippet ~fref "Adicionar Figura" i
+Figura~\ref{${1:fig:1}}
+endsnippet
+
+snippet ~tref "Adicionar tabela" i
+Tabela~\ref{${1:fig:1}}
+endsnippet
+
+snippet ~ref "Adicionar referência" i
+~\ref{${1:fig:1}}
 endsnippet
 
 snippet $dq  "Aspas 'duplas'" Ai
@@ -156,15 +169,15 @@ endsnippet
 ####################################################
 # Para acelerar escrita de citações no texto 
 #####################################################
-snippet cit "Definição de Citação" i
-\cite{${1:citation}}
-endsnippet
+#snippet cit "Definição de Citação" i
+#\cite{${1:citation}}
+#endsnippet
 
 snippet ait "Citando Author" i
-\citet{${1:Key}}
+\citet*{${1:Key}}
 endsnippet
 
-snippet pcit "Citando Author" i
+snippet pit "Citando Author" i
 \citep{${1:Key}}
 endsnippet
 

@@ -21,9 +21,9 @@ Description: ${1}
 
 endsnippet
 
-snippet "(\w+).par" "Parenthesis (postfix)" r
-(`!p snip.rv = match.group(1)`$1)$0
-endsnippet
+#snippet "(\w+).par" "Parenthesis (postfix)" r
+#(`!p snip.rv = match.group(1)`$1)$0
+#endsnippet
 
 #snippet "(\w+) np" "NUmpy import" rA
 #`!p snip.rv = 'import numpy as np' if match.group(1)=='import' else match.group(1)`
@@ -47,7 +47,7 @@ $3${3/(from)/(?0: sklearn.preprocessing import:)/}${5:MinMaxScaler}
 endsnippet
 
 snippet ddef "Function with DocString Associated" A
-def ${1:func_name}(${2:arg}):
+def  ${1:func_name}(${2:arg}):
 	"""
 		File: `!p snip.rv=snip.fn`
 		Function Name: $1
@@ -55,10 +55,11 @@ def ${1:func_name}(${2:arg}):
 		Description: ${4: Function Description}
 	"""
 	$0
+
 endsnippet
 
 snippet cclas "Class definition with docstring" A
-class ${1:ClassName}:
+class  ${1:ClassName}:
 	"""
 	Class: $1
 	${2:Class Docstring}
