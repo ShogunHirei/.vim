@@ -82,7 +82,7 @@ else
 endif
 
 " Vim corretor automático para texto
-Plug 'sedm0784/vim-you-autocorrect'
+Plug 'sedm0784/vim-you-autocorrect', { 'branch': 'gh5_flicker'}
 
 " Nord Pallete Color Scheme
 Plug 'mhartington/oceanic-next'
@@ -294,12 +294,12 @@ endfunction
 
 nnoremap <F8> :call Toogle_spell()<CR>
 
-" Vim-Grammarous
-" Enable use of vim-spelllang
-let g:grammarous#use_vim_spelllang=1
-let g:grammarous#show_first_error = 1
-nnoremap <localleader>G <Plug>(grammarous-open-info-window)
-vnoremap <C-g> :GrammarousCheck <CR> 
+"" Vim-Grammarous
+"" Enable use of vim-spelllang
+"let g:grammarous#use_vim_spelllang=1
+"let g:grammarous#show_first_error = 1
+"nnoremap <localleader>G <Plug>(grammarous-open-info-window)
+"vnoremap <C-g> :GrammarousCheck <CR> 
 
 
 "################ ############## -###############-> ULTISNIPS ############### ###############  
@@ -316,10 +316,11 @@ function! <SID>ExpandSnippetOrReturn()
     return "\<CR>"
   endif
 endfunction
-imap <expr> <CR> pumvisible() ? "<C-R>=<SID>ExpandSnippetOrReturn()<CR>" : "<Plug>delimitMateCR"
-"imap <expr> <CR> pumvisible() ? "<C-R>=<SID>ExpandSnippetOrReturn()<CR>" : "\n"
+" Those mapping below must remove the '\' before the quote to work
+"imap <expr> <CR> pumvisible() ? \"<C-R>=<SID>ExpandSnippetOrReturn()<CR>" : \"<Plug>delimitMateCR"
+"imap <expr> <CR> pumvisible() ? \"<C-R>=<SID>ExpandSnippetOrReturn()<CR>" : \"\n"
 
-let g:UltiSnipsExpandTrigger = "<NUL>"
+"let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsJumpForwardTrigger="ª"
 let g:UltiSnipsJumpBackwardTrigger="º"
@@ -327,34 +328,34 @@ let g:UltiSnipsSnippetDirectories = ['$HOME/.vim/UltiSnips', 'UltiSnips']
 
 "############################################# ---> YOUCOMPLETEME ################################
 
-let g:ycm_use_clangd = "Always"
-"let g:ycm_server_python_interpreter = ''
+"let g:ycm_use_clangd = "Always"
+""let g:ycm_server_python_interpreter = ''
 
-" Video do Youtube TLDR
+"" Video do Youtube TLDR
 
-let g:ycm_python_binary_path = 'python3'
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_min_num_of_chars_for_completion = 2
+"let g:ycm_python_binary_path = 'python3'
+"let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_min_num_of_chars_for_completion = 2
 
-" Trying to use a gobal configuration file to python coding -> Valloric's User's Guide
-let g:ycm_python_interpreter_path = ''
+"" Trying to use a gobal configuration file to python coding -> Valloric's User's Guide
+"let g:ycm_python_interpreter_path = ''
 
-" Function to get variable of python
-"function! GetBashPython()
-    "let b:env_python = system('which python3')
-"endfunction
+"" Function to get variable of python
+""function! GetBashPython()
+    ""let b:env_python = system('which python3')
+""endfunction
 
-"" Call function to get python environment
-":call GetBashPython()
+""" Call function to get python environment
+"":call GetBashPython()
 
-let g:ycm_python_sys_path = ["/usr/local/lib/python3.6/dist-packages/tensorflow"]
-let g:ycm_extra_conf_vim_data = [
-  \  'g:ycm_python_interpreter_path',
-  \  'g:ycm_python_sys_path'
-  \]
-let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_config/python/global_extra_conf.py'
-let g:ycm_server_python_interpreter = '/usr/bin/python3.6'
-"let g:ycm_server_python_interpreter = b:env_python
+"let g:ycm_python_sys_path = ["/usr/local/lib/python3.6/dist-packages/tensorflow"]
+"let g:ycm_extra_conf_vim_data = [
+  "\  'g:ycm_python_interpreter_path',
+  "\  'g:ycm_python_sys_path'
+  "\]
+"let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_config/python/global_extra_conf.py'
+"let g:ycm_server_python_interpreter = '/usr/bin/python3.6'
+""let g:ycm_server_python_interpreter = b:env_python
 
 
 " ############################################# --> VIMTEX #######################################
